@@ -1,0 +1,95 @@
+affinity: {}
+allowIcmp: false
+config:
+  modules:
+    icmp:
+        prober: icmp
+        timeout: 5s
+        icmp:
+          preferred_ip_protocol: ip4 
+configExistingSecretName: ""
+containerPort: 9115
+dnsConfig: null
+dnsPolicy: null
+extraArgs: []
+extraConfigmapMounts: []
+extraContainers: []
+extraEnv: {}
+extraSecretMounts: []
+extraVolumes: []
+image:
+  pullPolicy: IfNotPresent
+  repository: prom/blackbox-exporter
+  tag: v0.19.0
+ingress:
+  annotations: {}
+  enabled: false
+  hosts: []
+  path: /
+  tls: []
+kind: Deployment
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+modules:
+  icmp:
+    icmp:
+      preferred_ip_protocol: ip4
+    prober: icmp
+    timeout: 5s
+networkPolicy:
+  allowMonitoringNamespace: false
+  enabled: false
+nodeSelector: {}
+pod:
+  labels: {}
+podAnnotations: {}
+podDisruptionBudget: {}
+priorityClassName: ""
+prometheusRule:
+  additionalLabels: {}
+  enabled: false
+  namespace: ""
+  rules: []
+pspEnabled: true
+readOnlyRootFilesystem: false
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+replicas: 1
+resources: {}
+restartPolicy: Always
+runAsNonRoot: false
+runAsUser: 0
+secretConfig: false
+service:
+  annotations: {}
+  labels: {}
+  port: 9115
+  type: ClusterIP
+serviceAccount:
+  annotations: {}
+  create: true
+  name: null
+serviceMonitor:
+  bearerTokenFile: null
+  defaults:
+    additionalMetricsRelabels: {}
+    interval: 30s
+    labels: {}
+    module: icmp
+    scrapeTimeout: 30s
+  enabled: false
+  scheme: http
+  targets: 
+   - 10.0.54.173
+   - 10.0.38.91
+  tlsConfig: {}
+strategy:
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+  type: RollingUpdate
+tolerations: []
