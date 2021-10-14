@@ -1,0 +1,61 @@
+Runinnig
+
+go mod init tt_eks
+go mod tidy
+go test -v
+
+error1: go test -v
+?   	tt_eks	[no test files]
+
+solution:
+Files containing tests should be called name_test, with the _test suffix. They should be alongside the code that they are testing
+
+
+
+error2:
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66: Running command terraform with args [apply -input=false -auto-approve -var example=test -var example_list=["test"] -var example_map={"expected" = "test"} -var-file eks-cluster.tf -no-color -lock=false]
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66: 
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66: Error: Unexpected "module" block
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66: 
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66:   on eks-cluster.tf line 1:
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66:    1: module "eks" {
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66: 
+TestTerraform 2021-10-14T08:22:44-03:00 logger.go:66: Blocks are not allowed here.
+TestTerraform 2021-10-14T08:22:44-03:00 retry.go:99: Returning due to fatal error: FatalError{Underlying: error while running command: exit status 1; 
+Error: Unexpected "module" block
+
+
+
+
+------
+
+TestTerraform 2021-10-14T08:40:00-03:00 logger.go:66: Running command terraform with args [apply -input=false -auto-approve -var example=test -var example_list=["test"] -var example_map={"expected" = "test"} -var-file eks-cluster.tf -no-color -lock=false]
+TestTerraform 2021-10-14T08:40:01-03:00 logger.go:66: 
+TestTerraform 2021-10-14T08:40:01-03:00 logger.go:66: Error: Unexpected "data" block
+TestTerraform 2021-10-14T08:40:01-03:00 logger.go:66: 
+TestTerraform 2021-10-14T08:40:01-03:00 logger.go:66:   on eks-cluster.tf line 1:
+TestTerraform 2021-10-14T08:40:01-03:00 logger.go:66:    1: data "aws_eks_cluster" "cluster" {
+TestTerraform 2021-10-14T08:40:01-03:00 logger.go:66: 
+TestTerraform 2021-10-14T08:40:01-03:00 logger.go:66: Blocks are not allowed here.
+TestTerraform 2021-10-14T08:40:01-03:00 retry.go:99: Returning due to fatal error: FatalError{Underlying: error while running command: exit status 1; 
+Error: Unexpected "data" block
+
+  on eks-cluster.tf line 1:
+   1: data "aws_eks_cluster" "cluster" {
+
+Blocks are not allowed here.}
+    apply.go:15: 
+        	Error Trace:	apply.go:15
+        	            				tt_test.go:44
+        	Error:      	Received unexpected error:
+        	            	FatalError{Underlying: error while running command: exit status 1; 
+        	            	Error: Unexpected "data" block
+        	            	
+        	            	  on eks-cluster.tf line 1:
+        	            	   1: data "aws_eks_cluster" "cluster" {
+        	            	
+        	            	Blocks are not allowed here.}
+        	Test:       	TestTerraform
+
+
+
