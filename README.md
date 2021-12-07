@@ -10,6 +10,4 @@ $ terraform apply -auto-approve
 $ cd monitoring
 $ terraform apply -auto-approve
 
-$ cd addons
-$ terraform apply -auto-approve
 ```
