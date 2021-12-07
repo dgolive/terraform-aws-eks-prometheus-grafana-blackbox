@@ -3,13 +3,13 @@
 
 
 ```
-$ terraform apply \
--target=module.controlplane \
--target=module.network \
--target=module.nodes && \
-terraform apply \
--target=module.kubernetes \
--target=module.kube-prometheus-stack \
--target=module.blackbox \
--target=module.grafana
+$ cd eks-cluster
+$ terraform init
+$ terraform apply -auto-approve
+
+$ cd monitoring
+$ terraform apply -auto-approve
+
+$ cd addons
+$ terraform apply -auto-approve
 ```
