@@ -41,7 +41,7 @@ jobs:
           author_name: Danilo
           author_email: danilogo0001@gmail.com
           message: GitOps
-          add: '*'
+          add: '*.yaml'
           cwd: '/home/mibre/terraform/aws/eks/terraform-aws-eks-prometheus-grafana-blackbox'
 
         #run: |
