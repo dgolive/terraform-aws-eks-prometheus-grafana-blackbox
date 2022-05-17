@@ -1,4 +1,0 @@
-image:
-  repository: dockersamples/static-site
-service:
-  nodePort: 30888

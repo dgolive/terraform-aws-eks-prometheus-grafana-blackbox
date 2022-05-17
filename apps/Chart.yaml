@@ -1,6 +1,0 @@
-apiVersion: v1
-appVersion: 0.1.7
-description: linuxtips-app1
-name: app1
-version: 0.1.0
-
