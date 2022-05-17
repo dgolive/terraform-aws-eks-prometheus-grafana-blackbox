@@ -16,7 +16,7 @@ spec:
       - name: app2
         image: dockersamples/static-site #com valor abaixo, ele printa na tela
         env:
-        - name: AUTHOR
+        - name: DANILO
           value: STRIGUS
         ports:
         - containerPort: 80
