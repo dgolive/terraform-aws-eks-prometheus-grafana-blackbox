@@ -11,6 +11,7 @@ Adding new context
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 
 $ cd monitoring
+$ terraform init
 $ terraform apply -auto-approve
 
 ```
