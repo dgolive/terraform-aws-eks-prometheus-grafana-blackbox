@@ -3,13 +3,15 @@
 
 
 ```
-$ terraform apply \
--target=module.controlplane \
--target=module.network \
--target=module.nodes && \
-terraform apply \
--target=module.kubernetes \
--target=module.kube-prometheus-stack \
--target=module.blackbox \
--target=module.grafana
+$ cd eks-cluster
+$ terraform init
+$ terraform apply -auto-approve
+
+Adding new context
+aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+
+$ cd monitoring
+$ terraform init
+$ terraform apply -auto-approve
+
 ```
