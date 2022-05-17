@@ -37,7 +37,7 @@ jobs:
     steps:  
       - name: commit
         run: |
-          git config--local user.email "danilogo0001@gmail.com"
+          git config --local user.email "danilogo0001@gmail.com"
           git config --local user.name "Danilo"
           git commit -am "GitOps"
 
