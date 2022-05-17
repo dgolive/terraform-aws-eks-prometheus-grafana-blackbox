@@ -42,14 +42,15 @@ jobs:
           author_email: danilogo0001@gmail.com
           message: GitOps
           add: '*'
+          cwd: '/home/mibre/terraform/aws/eks/terraform-aws-eks-prometheus-grafana-blackbox'
 
         #run: |
         #  git config --local user.email "danilogo0001@gmail.com"
         #  git config --local user.name "Danilo"
         #  git commit -am "GitOps"
 
-      - name: push
-        uses: ad-m/github-push-action@master
+      #- name: push
+      #  uses: ad-m/github-push-action@master
 
       - name: update app2
         run: |
