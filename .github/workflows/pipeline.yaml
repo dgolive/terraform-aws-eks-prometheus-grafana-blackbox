@@ -36,7 +36,7 @@ jobs:
     
     steps:  
       - name: commit
-        uses: EndBug/add-and-commit@v9
+        #uses: EndBug/add-and-commit@v9
         #with:
           #author_name: Danilo
           #author_email: danilogo0001@gmail.com
