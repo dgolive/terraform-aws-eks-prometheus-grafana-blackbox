@@ -37,17 +37,18 @@ jobs:
     steps:  
       - name: commit
         uses: EndBug/add-and-commit@v9
-        with:
-          author_name: Danilo
-          author_email: danilogo0001@gmail.com
-          message: GitOps
-          add: '*.yaml'
-          cwd: './terraform-aws-eks-prometheus-grafana-blackbox/'
+        #with:
+          #author_name: Danilo
+          #author_email: danilogo0001@gmail.com
+          #message: GitOps
+          #add: '*.yaml'
+          #cwd: './terraform-aws-eks-prometheus-grafana-blackbox/'
 
-        #run: |
-        #  git config --local user.email "danilogo0001@gmail.com"
-        #  git config --local user.name "Danilo"
-        #  git commit -am "GitOps"
+        run: |
+          git config --local user.email "danilogo0001@gmail.com"
+          git config --local user.name "Danilo"
+          git commit -am "GitOps"
+          git push origin dev
 
       #- name: push
       #  uses: ad-m/github-push-action@master
