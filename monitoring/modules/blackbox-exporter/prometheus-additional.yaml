@@ -4,7 +4,7 @@
   params:
     module: [icmp]
   static_configs:
-  - targets: ["10.0.2.172"]
+  - targets: ["10.0.2.193"]
   relabel_configs:
   - source_labels: [__address__]
     target_label: __param_target

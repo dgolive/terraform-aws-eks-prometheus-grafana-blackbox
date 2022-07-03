@@ -84,8 +84,9 @@ serviceMonitor:
   enabled: false
   scheme: http
   targets: 
-   - 10.0.54.173
-   - 10.0.38.91
+   - 10.0.2.193
+   - 10.0.2.79
+   - 10.0.3.242
   tlsConfig: {}
 strategy:
   rollingUpdate:
