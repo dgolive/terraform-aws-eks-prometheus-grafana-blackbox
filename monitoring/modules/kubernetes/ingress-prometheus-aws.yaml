@@ -14,7 +14,7 @@ spec:
       paths:
       - backend:
           service:
-            name: kube-prometheus-stack-prometheus
+            name: prometheus-stack-prometheu-prometheus
             port:
               number: 9090
         path: /
@@ -34,7 +34,7 @@ spec:
       paths:      
       - backend:
           service:
-            name: kube-prometheus-stack-grafana
+            name: prometheus-stack-grafana
             port:
               number: 80
         path: /

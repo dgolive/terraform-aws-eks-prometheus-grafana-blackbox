@@ -8,13 +8,11 @@ alertmanager:
     clusterAdvertiseAddress: false
     configMaps: []
     containers: []
-    externalUrl: null
     forceEnableClusterMode: false
     image:
       repository: quay.io/prometheus/alertmanager
       sha: ""
-      #tag: v0.21.0
-      tag: latest
+      tag: v0.21.0
     initContainers: []
     listenLocal: false
     logFormat: logfmt
@@ -103,7 +101,6 @@ alertmanager:
     create: true
     name: ""
   serviceMonitor:
-    bearerTokenFile: null
     interval: ""
     metricRelabelings: []
     relabelings: []
@@ -194,8 +191,7 @@ grafana:
     pullPolicy: IfNotPresent
     repository: curlimages/curl
     sha: ""
-    #tag: 7.73.0
-    tag: latest
+    tag: 7.73.0
   enabled: true
   env: {}
   envFromSecret: ""
@@ -233,8 +229,7 @@ grafana:
     pullPolicy: IfNotPresent
     repository: grafana/grafana
     sha: ""
-    #tag: 7.4.3
-    tag: latest
+    tag: 7.4.3
   imageRenderer:
     enabled: false
     env:
@@ -275,8 +270,7 @@ grafana:
       pullPolicy: IfNotPresent
       repository: busybox
       sha: ""
-      #tag: 1.31.1
-      tag: latest
+      tag: 1.31.1
     resources: {}
   ldap:
     config: ""
@@ -329,10 +323,13 @@ grafana:
     port: 80
     portName: service
     targetPort: 3000
-    type: LoadBalancer
+    type: NodePort
   serviceAccount:
     create: true
+    name: null
+    nameTest: null
   serviceMonitor:
+    Monitor: true
     enabled: false
     interval: ""
     labels: {}
@@ -341,24 +338,16 @@ grafana:
     relabelings: []
     scheme: http
     scrapeTimeout: 20s
-    Monitor: true
+    selfMonitor: true
     tlsConfig: {}
   sidecar:
     dashboards:
       SCProvider: true
       annotations: {}
-      defaultFolderName: null
       enabled: true
       folder: /tmp/dashboards
-      folderAnnotation: null
       label: grafana_dashboard
-      labelValue: null
-      #multicluster: false
-      multicluster:
-        global:
-          enabled: false
-        etcd:
-          enabled: false
+      multicluster: false
       provider:
         allowUiUpdates: false
         disableDelete: false
@@ -367,25 +356,22 @@ grafana:
         name: sidecarProvider
         orgid: 1
         type: file
-      searchNamespace: null
     datasources:
       annotations: {}
       createPrometheusReplicasDatasources: false
       defaultDatasourceEnabled: true
       enabled: true
       label: grafana_datasource
-      labelValue: null
-      searchNamespace: null
     enableUniqueFilenames: false
     image:
       repository: quay.io/kiwigrid/k8s-sidecar
       sha: ""
-      #tag: 1.10.7
-      tag: latest
+      tag: 1.10.7
     imagePullPolicy: IfNotPresent
     notifiers:
       enabled: false
       label: grafana_notifier
+      searchNamespace: null
     resources: {}
   smtp:
     existingSecret: ""
@@ -396,15 +382,14 @@ grafana:
     image: bats/bats
     imagePullPolicy: IfNotPresent
     securityContext: {}
-    #tag: v1.1.0
-    tag: latest
+    tag: v1.1.0
   tolerations: []
 kube-state-metrics:
   affinity: {}
   autosharding:
     enabled: false
   collectors:
-    #certificatesigningrequests: true
+    certificatesigningrequests: true
     configmaps: true
     cronjobs: true
     daemonsets: true
@@ -444,12 +429,12 @@ kube-state-metrics:
   image:
     pullPolicy: IfNotPresent
     repository: k8s.gcr.io/kube-state-metrics/kube-state-metrics
-    #tag: v1.9.8
-    tag: latest
+    tag: v1.9.8
   imagePullSecrets: []
   kubeTargetVersionOverride: ""
   kubeconfig:
     enabled: false
+    secret: null
   namespaceOverride: ""
   nodeSelector: {}
   podAnnotations: {}
@@ -487,6 +472,7 @@ kube-state-metrics:
     annotations: {}
     create: true
     imagePullSecrets: []
+    name: null
   tolerations: []
 kubeApiServer:
   enabled: true
@@ -510,11 +496,9 @@ kubeControllerManager:
     targetPort: 10252
   serviceMonitor:
     https: false
-    insecureSkipVerify: null
     interval: ""
     metricRelabelings: []
     relabelings: []
-    serverName: null
 kubeDns:
   enabled: false
   service:
@@ -565,11 +549,9 @@ kubeScheduler:
     targetPort: 10251
   serviceMonitor:
     https: false
-    insecureSkipVerify: null
     interval: ""
     metricRelabelings: []
     relabelings: []
-    serverName: null
 kubeStateMetrics:
   enabled: true
   serviceMonitor:
@@ -673,8 +655,7 @@ prometheus:
     image:
       repository: quay.io/prometheus/prometheus
       sha: ""
-      #tag: v2.24.0
-      tag: latest
+      tag: v2.24.0
     initContainers: []
     listenLocal: false
     logFormat: logfmt
@@ -709,10 +690,7 @@ prometheus:
     retention: 10d
     retentionSize: ""
     routePrefix: /
-    ruleNamespaceSelector: 
-      matchLabels:
-        app: custom-apps
-        release: kube-prometheus-stack
+    ruleNamespaceSelector: {}
     ruleSelector: {}
     ruleSelectorNilUsesHelmValues: true
     scrapeInterval: ""
@@ -723,11 +701,10 @@ prometheus:
       runAsGroup: 2000
       runAsNonRoot: true
       runAsUser: 1000
-    serviceMonitorNamespaceSelector:
+    serviceMonitorNamespaceSelector: {}
+    serviceMonitorSelector: 
       matchLabels:
-        app: custom-apps
         release: kube-prometheus-stack
-    serviceMonitorSelector: {}
     serviceMonitorSelectorNilUsesHelmValues: false
     shards: 1
     storageSpec: {}
@@ -748,17 +725,16 @@ prometheus:
     port: 9090
     sessionAffinity: ""
     targetPort: 9090
-    type: LoadBalancer
+    type: NodePort
   serviceAccount:
     create: true
     name: ""
   serviceMonitor:
-    bearerTokenFile: null
     interval: ""
-    scrapeTimeout: 20s
     metricRelabelings: []
     relabelings: []
     scheme: ""
+    scrapeTimeout: 20s
     selfMonitor: true
     tlsConfig: {}
   servicePerReplica:
@@ -804,12 +780,11 @@ prometheus-node-exporter:
       pspAnnotations: {}
       pspEnabled: true
   hostNetwork: true
-  #hostRootFsMount: true
+  hostRootFsMount: true
   image:
     pullPolicy: IfNotPresent
     repository: quay.io/prometheus/node-exporter
-    #tag: v1.1.2
-    tag: latest
+    tag: v1.1.2
   namespaceOverride: ""
   nodeSelector: {}
   podAnnotations:
@@ -819,6 +794,7 @@ prometheus-node-exporter:
   prometheus:
     monitor:
       additionalLabels: {}
+      bearerTokenFile: null
       enabled: false
       namespace: ""
       relabelings: []
@@ -839,6 +815,7 @@ prometheus-node-exporter:
     annotations:
       prometheus.io/scrape: "true"
     listenOnAllInterfaces: true
+    nodePort: null
     port: 9100
     targetPort: 9100
     type: ClusterIP
@@ -846,6 +823,7 @@ prometheus-node-exporter:
     annotations: {}
     create: true
     imagePullSecrets: []
+    name: null
   sidecarVolumeMount: []
   sidecars: []
   tolerations:
@@ -869,8 +847,7 @@ prometheusOperator:
         pullPolicy: IfNotPresent
         repository: jettech/kube-webhook-certgen
         sha: ""
-        #tag: v1.5.0
-        tag: latest
+        tag: v1.5.0
       nodeSelector: {}
       podAnnotations: {}
       priorityClassName: ""
@@ -888,8 +865,7 @@ prometheusOperator:
     pullPolicy: IfNotPresent
     repository: quay.io/prometheus-operator/prometheus-operator
     sha: ""
-    #tag: v0.46.0
-    tag: latest
+    tag: v0.46.0
   kubeletService:
     enabled: true
     namespace: kube-system
@@ -900,8 +876,7 @@ prometheusOperator:
   prometheusConfigReloaderImage:
     repository: quay.io/prometheus-operator/prometheus-config-reloader
     sha: ""
-    #tag: v0.46.0
-    tag: latest
+    tag: v0.46.0
   prometheusInstanceNamespaces: []
   resources: {}
   secretFieldSelector: ""
@@ -936,32 +911,3 @@ prometheusOperator:
     internalPort: 10250
     tlsMinVersion: VersionTLS13
   tolerations: []
-speedtest:
-  enabled: true
-  endpoints: 192.168.15.70
-  jobLabel: speedtest
-  serviceMonitor:
-    labels: {}
-    interval: ""
-    metricRelabelings: []
-    relabelings: []
-    scrapeTimeout: 120s
-    path: /probe
-    port: probe
-    selector:
-      matchLabels:
-        app: speedtest
-  service:
-    annotations: {}
-    clusterIP: ""
-    externalIPs: []
-    labels: {}
-    loadBalancerIP: 192.168.15.70
-    loadBalancerSourceRanges: []
-    port: 9516
-    portName: probe
-    sessionAffinity: ""
-    targetPort: 9516
-    type: LoadBalancer
-  serviceAccount:
-    create: true
